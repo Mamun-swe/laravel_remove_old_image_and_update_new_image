@@ -62,3 +62,14 @@
             }
         }
     }
+
+
+##Destroy 
+public function destroy($id)
+    {
+        $data = Campaign::find($id);
+        $old_image = public_path().'/campaigns/'.$data->image;
+        unlink($old_image);
+        Campaign::where('id', $id)->delete();
+        return response()->json(['message' => 'Successfully delete.' ], 200);
+}
